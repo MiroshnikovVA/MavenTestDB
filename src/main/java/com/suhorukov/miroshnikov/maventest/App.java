@@ -14,17 +14,11 @@ import java.util.List;
 public class App 
 {
     public static void main( String[] args ) {
-        GuestBookControllerH2DB controller = null;
-        try {
-            controller = new GuestBookControllerH2DB();
+        try (GuestBookControllerH2DB controller = new GuestBookControllerH2DB()) {
             controller.createTableGuestBook();
             work(controller);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } finally {
-            controller.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
     }
 

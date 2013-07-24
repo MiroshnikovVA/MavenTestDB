@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * Time: 11:36
  * To change this template use File | Settings | File Templates.
  */
-public abstract class H2DBConnectable implements Closeable {
+public abstract class H2DBConnectable implements AutoCloseable {
     private static final String DB_DRIVER = "org.h2.Driver";
     //private static final String DB_CONNECTION = "jdbc:h2:mem:mydatabase";
     private static final String DB_CONNECTION = "jdbc:h2:~/marventestdb";
@@ -21,7 +21,7 @@ public abstract class H2DBConnectable implements Closeable {
     private static final String DB_USER = "user1";
     private static final String DB_PASSWORD = "password1";
 
-    protected Connection getNewConnection() throws ClassNotFoundException {
+    private Connection getNewConnection() throws ClassNotFoundException {
 
         Connection dbConnection = null;
 
@@ -60,7 +60,9 @@ public abstract class H2DBConnectable implements Closeable {
     @Override
     public void close() {
         try {
-            currentConnection.close();
+            if (currentConnection!=null){
+                currentConnection.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

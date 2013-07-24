@@ -103,7 +103,7 @@ public class GuestBookControllerH2DB extends H2DBConnectable implements GuestBoo
 
         String selectTableSQL = "SELECT ID, POST_DATE, MESSAGE FROM GUEST_BOOK";
 
-        ArrayList<Record> records = new ArrayList<Record>();
+        ArrayList<Record> records = new ArrayList<>();
 
         try {
             dbConnection = getCurrentConnection();
@@ -112,7 +112,6 @@ public class GuestBookControllerH2DB extends H2DBConnectable implements GuestBoo
             System.out.println(selectTableSQL);
 
             // execute create SQL stetement
-            java.util.Date now = new java.util.Date();
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()){
